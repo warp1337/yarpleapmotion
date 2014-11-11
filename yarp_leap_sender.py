@@ -9,9 +9,9 @@
 ################################################################################
 
 ################################################################################
-# Author flier: Added YARP support for sending bottles containing "hand" info  #
+# Author flier: Added YARP support for sending bottles containing "hands" data #
 # This is done by calculating the relative rotation for each bone in the right #
-# hand                                                                         #
+# hand. Results are in euler angles (could also be done as 3x3)                #
 #                                                                              #
 # Please do not forget to set your PYTHONPATH (see below) before running this  #
 # PYTHONPATH=$PYTHONPATH:/path/to/SDK/lib:/path/to/SDK/lib/x64                 #
@@ -26,7 +26,7 @@ from numpy import float64, hypot, zeros, matrix
 from Leap import CircleGesture, KeyTapGesture, ScreenTapGesture, SwipeGesture
 
 
-class SampleListener(Leap.Listener):
+class LeapListener(Leap.Listener):
     
     finger_names = ['Thumb', 'Index', 'Middle', 'Ring', 'Pinky']
     bone_names = ['Metacarpal', 'Proximal', 'Intermediate', 'Distal']
@@ -193,7 +193,7 @@ class SampleListener(Leap.Listener):
 
 def main():
     # Create a sample listener and controller
-    listener   = SampleListener()
+    listener   = LeapListener()
     controller = Leap.Controller()
 
     # Have the sample listener receive events from the controller
